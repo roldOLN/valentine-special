@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body{
+            background-image: url(./home.png);
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            min-height: 100vh;      
+            margin: 0;              
+            display: flex;         
+            flex-direction: column; 
+            justify-content: center;
+            align-items: center;    
+            text-align: center;    
+        }
+        .container {
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            width: 500px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #ed91aa;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #f5baca;
+        }
+        h2{
+            color: #ed91aa;
+            font-size: 2rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>What's the password?</h2>
+        <input type="text" id="nameInput" placeholder="Enter the password here..." onkeypress="handleEnter(event)">
+        <button onclick="verifyUser()">Enter</button>
+        <div id="message"></div>
+    </div>
+
+    <script>
+        const allowedNames = [
+            "mwa",
+            "kiss",
+            "i love you",
+            "i miss you",
+        ];
+
+        function verifyUser() {
+            const inputField = document.getElementById('nameInput');
+            const messageDiv = document.getElementById('message');
+            
+            const rawInput = inputField.value;
+            const normalizedInput = rawInput.trim().toLowerCase();
+
+            if (!normalizedInput) {
+                messageDiv.textContent = "Please enter a password first.";
+                return;
+            }
+
+            if (allowedNames.includes(normalizedInput)) {
+                window.location.href = "question.html"; 
+            } else {
+                window.location.href = "wrongPerson.html";
+            }
+        }
+
+        function handleEnter(event) {
+            if (event.key === 'Enter') {
+                verifyUser();
+            }
+        }
+    </script>
+</body>
+</html>
